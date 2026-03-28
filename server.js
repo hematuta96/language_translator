@@ -20,18 +20,12 @@ app.post("/translate", async (req, res) => {
     const { text, target } = req.body;
 
     try {
-        const response = await axios.post(
-    "https://libretranslate.com/translate",
-    {
-        q: text,
-        source: "en",
-        target: target,
-        format: "text"
-    }
-);
+        const response = await axios.get(
+            `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|${target}`
+        );
 
         res.json({
-            translatedText: response.data.translatedText
+            translatedText: response.data.responseData.translatedText
         });
 
     } catch (error) {
