@@ -5,7 +5,7 @@ async function translateText() {
     document.getElementById("outputText").value = "Translating...";
 
     try {
-        let response = await fetch("https://lang-trans-ql5x.onrender.com/translate", {
+        let response = await fetch("/translate", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
