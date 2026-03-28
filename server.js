@@ -24,8 +24,15 @@ app.post("/translate", async (req, res) => {
             `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|${target}`
         );
 
+        let mainTranslation = response.data.responseData.translatedText;
+
+        // 🔥 clean weird outputs
+        if (!mainTranslation || mainTranslation.length > 100) {
+            mainTranslation = "Translation not clear";
+        }
+
         res.json({
-            translatedText: response.data.responseData.translatedText
+            translatedText: mainTranslation
         });
 
     } catch (error) {
