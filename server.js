@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
 });
 
 const API_KEY = process.env.API_KEY;
-
+console.log("API KEY:", API_KEY);
 app.post("/translate", async (req, res) => {
     const { text, target } = req.body;
 
@@ -34,12 +34,12 @@ app.post("/translate", async (req, res) => {
         });
 
     } catch (error) {
-    console.log("FULL ERROR:", error.response?.data || error.message);
+    console.log("ERROR:", error.response?.data || error.message);
+
     res.status(500).json({
-        error: error.response?.data || error.message
+        translatedText: "Error: API failed"
     });
-}
-});
+}});
 
 const PORT = process.env.PORT || 3000;
 
