@@ -7,39 +7,39 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// 🔥 Serve frontend files
+// serve frontend
 app.use(express.static(path.join(__dirname)));
 
-// 🔥 Home route
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
 });
 
-const API_KEY = process.env.API_KEY;
-console.log("API KEY:", API_KEY);
+// 🔥 FREE API (LibreTranslate)
 app.post("/translate", async (req, res) => {
     const { text, target } = req.body;
 
     try {
         const response = await axios.post(
-            `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`,
+            "https://libretranslate.de/translate",
             {
                 q: text,
-                target: target
+                source: "auto",
+                target: target,
+                format: "text"
             }
         );
 
         res.json({
-            translatedText: response.data.data.translations[0].translatedText
+            translatedText: response.data.translatedText
         });
 
     } catch (error) {
-    console.log("ERROR:", error.response?.data || error.message);
-
-    res.status(500).json({
-        translatedText: "Error: API failed"
-    });
-}});
+        console.log(error.message);
+        res.status(500).json({
+            translatedText: "Error: Translation failed"
+        });
+    }
+});
 
 const PORT = process.env.PORT || 3000;
 
