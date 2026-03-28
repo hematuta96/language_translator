@@ -34,9 +34,11 @@ app.post("/translate", async (req, res) => {
         });
 
     } catch (error) {
-        console.log(error.response?.data || error.message);
-        res.status(500).send("Translation failed");
-    }
+    console.log("FULL ERROR:", error.response?.data || error.message);
+    res.status(500).json({
+        error: error.response?.data || error.message
+    });
+}
 });
 
 const PORT = process.env.PORT || 3000;
