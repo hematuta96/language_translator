@@ -17,6 +17,8 @@ async function translateText() {
         });
 
         let data = await response.json();
+        console.log(data); // debug
+
         document.getElementById("outputText").value = data.translatedText;
 
     } catch (error) {
@@ -24,8 +26,7 @@ async function translateText() {
         console.log(error);
     }
 }
-swapLanguages();
-translateText();
+
 function swapLanguages() {
     let source = document.getElementById("sourceLang");
     let target = document.getElementById("targetLang");
@@ -33,12 +34,10 @@ function swapLanguages() {
     let inputText = document.getElementById("inputText");
     let outputText = document.getElementById("outputText");
 
-    // swap dropdown values
     let tempLang = source.value;
     source.value = target.value;
     target.value = tempLang;
 
-    // swap text
     let tempText = inputText.value;
     inputText.value = outputText.value;
     outputText.value = tempText;
