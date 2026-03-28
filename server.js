@@ -21,14 +21,14 @@ app.post("/translate", async (req, res) => {
 
     try {
         const response = await axios.post(
-            "https://translate.argosopentech.com/translate",
-            {
-                q: text,
-                source: "en",
-                target: target,
-                format: "text"
-            }
-        );
+    "https://libretranslate.com/translate",
+    {
+        q: text,
+        source: "en",
+        target: target,
+        format: "text"
+    }
+);
 
         res.json({
             translatedText: response.data.translatedText
