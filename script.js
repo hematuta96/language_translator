@@ -24,3 +24,22 @@ async function translateText() {
         console.log(error);
     }
 }
+swapLanguages();
+translateText();
+function swapLanguages() {
+    let source = document.getElementById("sourceLang");
+    let target = document.getElementById("targetLang");
+
+    let inputText = document.getElementById("inputText");
+    let outputText = document.getElementById("outputText");
+
+    // swap dropdown values
+    let tempLang = source.value;
+    source.value = target.value;
+    target.value = tempLang;
+
+    // swap text
+    let tempText = inputText.value;
+    inputText.value = outputText.value;
+    outputText.value = tempText;
+}
